@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=VT323&display=swap");
+
+body {
+  margin: 20px;
+  font-family: "Poppins";
+  color: #333;
+}
+
+a {
+  color: #be3455;
+}
+
+img {
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 40px;
+}
+
+.nav-time {
+  margin-right: auto;
+}
+
+.nav-home {
+  margin-right: 10px;
+}
+
+div {
+  font-family: "Poppins";
+}
+
+footer {
+  position: block;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #be3455;
+  border-top: 1px solid #e2e2e2;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+
+table tr td {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.home-p {
+  text-align: center;
+}
+
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.offers,
+.products {
+  display: flex;
+  gap: 20px;
+}
+
+.form-field {
+  font-family: inherit;
+  border: 0;
+  border-bottom: 1px solid gray;
+  margin-left: 10px;
+  margin-right: 10px;
+  outline: 0;
+  color: #333;
+  background: transparent;
+  transition: border-color 0.2s;
+  width: 200px;
+  text-align: center;
+}
+
+/* CSS */
+.button {
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+  border-radius: 6px;
+  border: none;
+  background: #198888;
+  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1),
+    inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5),
+    0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+  color: #ffffff;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:focus {
+  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+    0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+  outline: 0;
+}
+
+.more-btn {
+  margin-left: 10px;
+}
+
+.signin-form {
+  text-align: center;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.poster-img {
+  width: 100px;
+  float: left;
+  margin-right: 10px;
+}
+
+.movie-data-text {
+  width: 20%;
+  float: right;
+  font-size: 12px;
+}
+
+.movie-grid {
+  font-size: 12px;
+}
+
+.nav-token {
+  display: none;
+}
+
+.timer {
+  width: 40px;
+  margin-right: 10px;
+  float: left;
+}
+
+.timer-btn {
+  float: right;
+}
+
+.warning-p {
+  font-size: 11px;
+  color: #be3455;
+}
+
+.register-form {
+  text-align: center;
+}
+
+.regi-button {
+  margin-top: 2rem;
+}
+
+.input-form {
+  margin-top: 1rem;
+}

@@ -1,26 +1,95 @@
-import logo from './logo.svg';
-import './App.css';
+import "devextreme/dist/css/dx.light.css";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 
-function App() {
+import "./css/main.css";
+
+// Pages for navigation
+import Home from "./pages/Home";
+import Movie from "./pages/Movie";
+import IndividualMovie from "./pages/IndividualMovie";
+import IndividualPerson from "./pages/IndividualPerson";
+import Register from "./pages/Register";
+import Signin from "./pages/Signin";
+
+import Timer from "./components/Timer";
+
+export default function App() {
+  const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
+
+  const [tokenNav, setTokenNav] = useState(true);
+  const [countDown, setCountDown] = useState(true);
+
+  useEffect(() => {
+    if (
+      !(ALLTOKEN === null || ALLTOKEN === undefined || ALLTOKEN === "undefined")
+    ) {
+      let TOKEN = ALLTOKEN.bearer;
+      if (
+        ALLTOKEN === null ||
+        ALLTOKEN === undefined ||
+        ALLTOKEN === "undefined" ||
+        TOKEN === null ||
+        TOKEN === undefined ||
+        TOKEN === "undefined"
+      ) {
+      } else {
+        setTokenNav(true);
+        setCountDown(true);
+      }
+    } else {
+      setTokenNav(false);
+      setCountDown(false);
+    }
+  });
+
+  function SignOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("end_date");
+    window.location.reload();
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="content">
+      <Router>
+        <div>
+          <nav>
+            <div className={countDown ? "nav-home" : "nav-time"}>
+              <h1>
+                <Link to="/">MOVIES</Link>
+              </h1>
+            </div>
+            <div className={countDown ? "nav-time" : "nav-token"}>
+              {/* <div className={countDown ? "nav-time" : ""}> */}
+              <Timer data={600000} />
+            </div>
+            <Link to="/">Home</Link>
+            <Link to="/movie">Movie</Link>
+            <Link to="/register">Register</Link>
+            <Link className={tokenNav ? "nav-token" : ""} to="/signin">
+              SignIn
+            </Link>
+            <Link className={!tokenNav ? "nav-token" : ""} onClick={SignOut}>
+              SignOut
+            </Link>
+          </nav>
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie" element={<Movie />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/data" element={<IndividualMovie />} />
+            <Route path="/people" element={<IndividualPerson />} />
+          </Routes>
+        </div>
+      </Router>
+      <footer>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
-          test
+          All data is from IMDB, Metacritic and RottenTomatoes. © 2023 Justin
+          Suh
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </footer>
     </div>
   );
 }
-
-export default App;
