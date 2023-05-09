@@ -237,6 +237,7 @@ export function useSingout(key) {
       .then((res) => res.json())
       .then((res) => {
         localStorage.removeItem("token");
+        localStorage.removeItem("email");
         NotificationManager.info("Please Signin Again", "Token expired", 3000);
         setTimeout(function () {
           window.location.href = "/";

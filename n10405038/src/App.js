@@ -16,7 +16,7 @@ import Timer from "./components/Timer";
 
 export default function App() {
   const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
-
+  const [email, setEmail] = useState();
   const [tokenNav, setTokenNav] = useState(true);
   const [countDown, setCountDown] = useState(true);
 
@@ -34,6 +34,7 @@ export default function App() {
         TOKEN === "undefined"
       ) {
       } else {
+        setEmail(localStorage.getItem("signin"));
         setTokenNav(true);
         setCountDown(true);
       }
@@ -46,6 +47,7 @@ export default function App() {
   function SignOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("end_date");
+    localStorage.removeItem("email");
     window.location.reload();
   }
 
@@ -65,13 +67,16 @@ export default function App() {
             </div>
             <Link to="/">Home</Link>
             <Link to="/movie">Movie</Link>
-            <Link to="/register">Register</Link>
+            <Link className={tokenNav ? "nav-token" : ""} to="/register">
+              Register
+            </Link>
             <Link className={tokenNav ? "nav-token" : ""} to="/signin">
               SignIn
             </Link>
             <Link className={!tokenNav ? "nav-token" : ""} onClick={SignOut}>
               SignOut
             </Link>
+            <p className={!tokenNav ? "nav-token" : ""}> {email}</p>
           </nav>
 
           <Routes>

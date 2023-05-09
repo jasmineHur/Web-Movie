@@ -88,7 +88,7 @@ function SigninForm() {
         };
 
         localStorage.setItem("token", JSON.stringify(tokens));
-
+        localStorage.setItem("signin", email);
         // use window.location for re-loading status
         window.location.href = "/";
       }
