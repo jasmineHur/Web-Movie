@@ -156,7 +156,7 @@ export function useIndividualPerson(key) {
           const data = await response.json();
 
           if (data.error) {
-            NotificationManager.info(
+            NotificationManager.error(
               "Please Signin Again",
               "Token expired",
               3000
@@ -219,8 +219,6 @@ export function useRefresh(key) {
 export function useSingout(key) {
   const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
 
-  console.log(ALLTOKEN);
-
   if (ALLTOKEN === null || ALLTOKEN === undefined || ALLTOKEN === "undefined") {
   } else {
     const headers = {
@@ -238,7 +236,7 @@ export function useSingout(key) {
       .then((res) => {
         localStorage.removeItem("token");
         localStorage.removeItem("email");
-        NotificationManager.info("Please Signin Again", "Token expired", 3000);
+        NotificationManager.error("Please Signin Again", "Token expired", 3000);
         setTimeout(function () {
           window.location.href = "/";
         }, 2000);

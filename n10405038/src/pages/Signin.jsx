@@ -89,8 +89,11 @@ function SigninForm() {
 
         localStorage.setItem("token", JSON.stringify(tokens));
         localStorage.setItem("signin", email);
+        NotificationManager.info(`Enjoy the movie!`, "Signin Success", 3000);
         // use window.location for re-loading status
-        window.location.href = "/";
+        setTimeout(function () {
+          window.location.href = "/";
+        }, 2000);
       }
     } catch (error) {
       // catched error will be printed out

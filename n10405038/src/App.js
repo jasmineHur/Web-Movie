@@ -48,7 +48,7 @@ export default function App() {
     localStorage.removeItem("token");
     localStorage.removeItem("end_date");
     localStorage.removeItem("email");
-    window.location.reload();
+    window.location.href("/");
   }
 
   return (

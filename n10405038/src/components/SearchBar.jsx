@@ -48,7 +48,7 @@ export default function SearchBar({ publishYear, search, page, submitSearch }) {
         </InputGroup.Text>
 
         <Button className="button more-btn" onClick={increasePageHandle}>
-          Further Movie
+          Show More
         </Button>
       </div>
       {/* <InputGroup size="lg" className="input-form">
