@@ -1,6 +1,8 @@
 import React from "react";
-import DataGrid, { Column, Selection } from "devextreme-react/data-grid";
 import { useNavigate } from "react-router-dom";
+// Table module
+import DataGrid, { Column, Selection } from "devextreme-react/data-grid";
+// Notification module
 import {
   NotificationContainer,
   NotificationManager
@@ -8,10 +10,15 @@ import {
 import "react-notifications/lib/notifications.css";
 
 export default function IndividualMovieTable({ data }) {
+  // localstorage token
   const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
+  // declare navigation
   const navigate = useNavigate();
 
+  // when click the row the function will start
   const onSelectionChanged = ({ selectedRowsData }) => {
+    // if there is no token the page will go to sign in
+    // with notification
     if (!ALLTOKEN) {
       NotificationManager.info(
         "for getting more detail",
@@ -22,6 +29,7 @@ export default function IndividualMovieTable({ data }) {
         navigate(`/signin`);
       }, 3000);
     } else {
+      // if there is token then redirect to person detail page
       const data = selectedRowsData[0];
       navigate(`/people?key=${data.id}`);
     }

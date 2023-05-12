@@ -16,10 +16,12 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-// https://js.devexpress.com/Demos/WidgetsGallery/Demo/Charts/StandardBar/React/SoftBlue/
-//https://react-chartjs-2.js.org/examples/vertical-bar-chart
+
 export default function IndividualPersonChart({ data }) {
+  // declare empty array
   let arrRating = [];
+  // X-axis for rating
+  // Y-axis for count- declare 0 first
   let objRating = [
     {
       rating: "1-2",
@@ -58,12 +60,14 @@ export default function IndividualPersonChart({ data }) {
       count: 0
     }
   ];
-
+  //if data has no error then push the imdbRating in empty array
+  // after terminate decimal point
   if (!data.error) {
     data.roles.map((data) => {
       arrRating.push(Math.floor(data.imdbRating));
     });
 
+    // then push the object array matched point number
     arrRating.forEach((x) => {
       if (x === 1) {
         objRating[0].count++;

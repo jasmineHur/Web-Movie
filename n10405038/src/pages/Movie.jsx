@@ -12,7 +12,7 @@ export default function Movie() {
   // UseState for search, publishYear, page
   const [search, setSearch] = useState("");
   const [publishYear, setPublishYear] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   // Using useWokrs
   const { data, loading } = useWorks(search);
 
@@ -28,7 +28,9 @@ export default function Movie() {
         }}
       />
 
-      {loading && <p>Loading...</p>}
+      <div className="loading-warning">
+        {loading && <p>Loading Please Wait...</p>}
+      </div>
 
       <MovieTable data={data} />
       <NotificationContainer />

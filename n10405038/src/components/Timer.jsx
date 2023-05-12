@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Countdown from "react-countdown";
 import { Button } from "react-bootstrap";
+// ccountdown for timer
+import Countdown from "react-countdown";
 import { useSingout } from "../utils";
-
+// Notification model
 import {
   NotificationContainer,
   NotificationManager
@@ -13,18 +14,20 @@ const API_URL = "http://sefdb02.qut.edu.au:3000";
 
 const Timer = () => {
   let timeSet = 599000; // 9min 50sec
+  const [data, setData] = useState({ date: Date.now(), delay: timeSet });
+  const wantedDelay = timeSet;
+
   let getLocalStorageValue = (s) => localStorage.getItem(s);
-  // Random component
+  // After timeout
   const Completionist = () => {
     useSingout();
   };
-
+  // if click the refresh button the function will workß
   const handleRefresh = () => {
+    // contain all the token in variable
     const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
-
-    // const [data, setData] = useState(null);
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
+    // remove localStorage
+    localStorage.removeItem("token");
 
     if (
       ALLTOKEN === null ||
@@ -32,13 +35,14 @@ const Timer = () => {
       ALLTOKEN === "undefined"
     ) {
     } else {
+      // if token is avaliable then refresh works
       const headers = {
         accept: "application/json",
         "Content-Type": "application/json"
       };
 
       const url_refresh = `${API_URL}/user/refresh`;
-
+      // fetch
       fetch(url_refresh, {
         method: "POST",
         headers,
@@ -46,9 +50,22 @@ const Timer = () => {
       })
         .then((res) => res.json())
         .then((res) => {
+          // if there is error then signout automatically
           if (res.error) {
-            NotificationManager.info("Please Signin Again", res.message, 3000);
+            NotificationManager.error(
+              "Please Signin Again",
+              "Something went wrong",
+              3000
+            );
+
+            localStorage.removeItem("end_date");
+            localStorage.removeItem("email");
+
+            setTimeout(function () {
+              window.location.href = "/";
+            }, 2000);
           } else {
+            // if there is no error new token will contain
             let tokens = {
               bearer: `${res.bearerToken.token}`,
               refresh: `${res.refreshToken.token}`
@@ -76,13 +93,8 @@ const Timer = () => {
     }
   };
 
-  const [data, setData] = useState(
-    { date: Date.now(), delay: timeSet } //60 seconds
-  );
-  const wantedDelay = timeSet; //60 s
-
-  //[START] componentDidMount
-  //Code runs only one time after each reloading
+  // ComponentDidMount
+  // Code runs only one time after each reloading
   useEffect(() => {
     const savedDate = getLocalStorageValue("end_date");
 
@@ -90,9 +102,9 @@ const Timer = () => {
       const currentTime = Date.now();
       const delta = parseInt(savedDate, 10) - currentTime;
 
-      //Do you reach the end?
+      // if the time is reched to end time
       if (delta > wantedDelay) {
-        //Yes we clear uour saved end date
+        // clear uour saved end date
         if (localStorage.getItem("end_date").length > 0)
           localStorage.removeItem("end_date");
       } else {
@@ -101,7 +113,6 @@ const Timer = () => {
       }
     }
   }, []);
-  //[END] componentDidMount
 
   return (
     <>

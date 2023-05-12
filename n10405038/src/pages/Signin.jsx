@@ -1,37 +1,42 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+// Notification module
 import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
-
+// API URL
 const API_URL = `http://sefdb02.qut.edu.au:3000`;
 // Email regular expression
 const EMAIL_RE =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const token = localStorage.getItem("token");
+const ALLTOKEN = localStorage.getItem("token");
 
 export default function Signin() {
   if (
-    token === null ||
-    token === "null" ||
-    token === undefined ||
-    token === "undefined"
+    ALLTOKEN === null ||
+    ALLTOKEN === "null" ||
+    ALLTOKEN === undefined ||
+    ALLTOKEN === "undefined"
   ) {
     return <SigninForm />;
   } else {
-    return <p> You have been signin </p>;
+    <p> You have been signin </p>;
+    setTimeout(function () {
+      window.location.href = "/";
+    }, 2000);
   }
 }
 
 function SigninForm() {
-  const [email, setEmail] = useState("mike@gmail.com");
-  const [password, setPassword] = useState("password");
+  // useState for conditions
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [emptyError, setEmptyError] = useState("");
   const [emailErrors, setEmailErrors] = useState({});
-
+  // empty check condition
   const emptyCheck =
     email === undefined ||
     email === null ||
@@ -42,6 +47,7 @@ function SigninForm() {
     password === "undefiend" ||
     password === "";
 
+  // function for signin by clicking the button
   const handleSubmittedInput = (event) => {
     if (emptyCheck) {
       setEmptyError("Please check empty Input.");

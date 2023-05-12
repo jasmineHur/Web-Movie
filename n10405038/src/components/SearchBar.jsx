@@ -2,15 +2,16 @@ import { Form, InputGroup, Button } from "react-bootstrap";
 import { useState } from "react";
 
 export default function SearchBar({ publishYear, search, page, submitSearch }) {
+  // declare useSate
   const [innerSearch, setInnerSearch] = useState(search);
   const [innerYear, setInnerYear] = useState(publishYear);
   const [innerPage, setInnerPage] = useState(page);
-
+  // when click the search button
   const submitHandle = () => {
     setInnerPage(1);
-    submitSearch([innerSearch, innerYear]);
+    submitSearch([innerSearch, innerYear, innerPage]);
   };
-
+  // when click the show more button
   const increasePageHandle = () => {
     setInnerPage(innerPage + 1);
     submitSearch([innerSearch, innerYear, innerPage]);

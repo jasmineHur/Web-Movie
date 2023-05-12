@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-
 import { useMovieDetail } from "../utils";
+// Table component
 import IndividualMovieTable from "../components/IndividualMovieTable";
 
 export default function IndividualMovie() {
@@ -8,9 +8,9 @@ export default function IndividualMovie() {
   const [searchParams] = useSearchParams();
   const title = searchParams.get("title");
   const key = searchParams.get("key");
-
+  // get the result (work) from useMovieDetail
   const { data: work } = useMovieDetail(key ?? "") ?? {};
-
+  // if no result show the message
   if (!work) {
     return <p>Movie Contenct Not Found!</p>;
   }

@@ -1,9 +1,12 @@
 import React from "react";
-import DataGrid, { Column, Selection } from "devextreme-react/data-grid";
 import { useNavigate } from "react-router-dom";
+// Table module
+import DataGrid, { Column, Selection } from "devextreme-react/data-grid";
 
 export default function IndividualPersonTable({ data }) {
+  // Navigation
   const navigate = useNavigate();
+  // when click the row it gose back to clicked movie detail
   const onSelectionChanged = ({ selectedRowsData }) => {
     const data = selectedRowsData[0];
     navigate(`/data?key=${data.movieId}`);

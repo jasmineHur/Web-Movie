@@ -4,13 +4,15 @@ import { NotificationManager } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 // API URL
 const API_URL = "http://sefdb02.qut.edu.au:3000";
+// ALL token
+const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
 
 // useWork for handling API about get movie list
 export function useWorks(...args) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  // using use effect bring the movie data
   useEffect(() => {
     getMovieData(...args)
       .then((response) => {
@@ -43,9 +45,10 @@ async function getMovieData(submittedInput) {
   // Url for fetch
   let url;
 
-  if (page === undefined || page === "undefined") {
+  if (page === undefined || page === "undefined" || search.length >= 1) {
     page = 1;
   }
+
   // set url based on search
   if (search !== undefined && publishYear === undefined) {
     url = `${API_URL}/movies/search?page=${page}&title=${search}`;
@@ -119,8 +122,7 @@ export function useMovieDetail(key) {
 
 /* Bring the person detail */
 export function useIndividualPerson(key) {
-  const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
-
+  // declare useState
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -141,12 +143,13 @@ export function useIndividualPerson(key) {
       let urlPerson = `${API_URL}/people/${key}`;
 
       (async () => {
+        // if no input key it will say error
         if (!key) {
           setError("No Work Found");
           setData(null);
           return;
         }
-
+        // try fetch frist
         try {
           const response = await fetch(urlPerson, {
             method: "GET",
@@ -154,17 +157,18 @@ export function useIndividualPerson(key) {
           });
 
           const data = await response.json();
-
+          // if data has error then go to main page
           if (data.error) {
             NotificationManager.error(
-              "Please Signin Again",
-              "Token expired",
+              "Please Try Again",
+              "Something went wrong",
               3000
             );
             setTimeout(function () {
               window.location.href = "/";
             }, 2000);
           } else {
+            // if get data successfully set the data
             setData(data);
             setError(null);
           }
@@ -181,46 +185,10 @@ export function useIndividualPerson(key) {
   return { data, loading, error };
 }
 
-export function useRefresh(key) {
-  const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
-
-  if (ALLTOKEN === null || ALLTOKEN === undefined || ALLTOKEN === "undefined") {
-  } else {
-    const headers = {
-      accept: "application/json",
-      "Content-Type": "application/json"
-    };
-
-    const url_refresh = `${API_URL}/user/refresh`;
-
-    fetch(url_refresh, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ refreshToken: ALLTOKEN.refresh })
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          // localStorage.setItem("token", null);
-        } else {
-          let tokens = {
-            bearer: `${res.bearerToken.token}`,
-            refresh: `${res.refreshToken.token}`
-          };
-
-          localStorage.setItem("token", JSON.stringify(tokens));
-        }
-      });
-  }
-
-  return 60000;
-}
-
 export function useSingout(key) {
-  const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
-
   if (ALLTOKEN === null || ALLTOKEN === undefined || ALLTOKEN === "undefined") {
   } else {
+    // if token is avaliable
     const headers = {
       accept: "application/json",
       "Content-Type": "application/json"
@@ -234,8 +202,11 @@ export function useSingout(key) {
     })
       .then((res) => res.json())
       .then((res) => {
+        // remove all the localstorage items
         localStorage.removeItem("token");
         localStorage.removeItem("email");
+        localStorage.removeItem("end_date");
+
         NotificationManager.error("Please Signin Again", "Token expired", 3000);
         setTimeout(function () {
           window.location.href = "/";

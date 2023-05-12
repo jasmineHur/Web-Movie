@@ -88,6 +88,13 @@ table tr td {
   text-align: center;
 }
 
+.loading-warning {
+  text-align: center;
+  font-size: 20px;
+  color: #be3455;
+  font-weight: 600;
+}
+
 /* CSS */
 .button {
   flex-direction: column;

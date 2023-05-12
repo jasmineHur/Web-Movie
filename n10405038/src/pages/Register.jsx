@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+// Notification module
 import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+
 // REST API address
 const API_URL = `http://sefdb02.qut.edu.au:3000`;
 // Email regular expression
@@ -14,12 +16,14 @@ const EMAIL_RE =
 
 export default function Register() {
   const navigate = useNavigate();
+  // useState for conditions
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [matchPassword, setMatchPassword] = useState("");
   const [emptyError, setEmptyError] = useState("");
   const [emailErrors, setEmailErrors] = useState({});
   const [pwErrors, setPwErrors] = useState({});
+  // empty check condition
   const emptyCheck =
     email === undefined ||
     email === null ||
@@ -34,10 +38,13 @@ export default function Register() {
     matchPassword === "undefiend" ||
     matchPassword === "";
 
+  // function for register by clicking the button
   const handleSubmittedInput = async () => {
+    // if fields are empty then set the error message
     if (emptyCheck) {
       setEmptyError("Please check empty Input.");
     } else {
+      // email validation
       if (!EMAIL_RE.test(email)) {
         setEmailErrors({
           ...emailErrors,
@@ -53,8 +60,10 @@ export default function Register() {
               "Password is not matched. Please check your input and try again."
           });
         } else {
+          // if passed all the input conditions register fetch will start
           registerAccount();
           const response = await registerAccount();
+          // if response erro then error noticiation will show
           if (response.error) {
             NotificationManager.error(
               `${response.message}`,
@@ -62,6 +71,7 @@ export default function Register() {
               3000
             );
           } else {
+            // if register successfully, redirecting to the sign in page
             NotificationManager.info("Please Signin", "Register Success", 3000);
             setTimeout(function () {
               navigate(`/signin`);
@@ -72,6 +82,7 @@ export default function Register() {
     }
   };
 
+  // register account
   const registerAccount = async () => {
     const url = `${API_URL}/user/register`;
 

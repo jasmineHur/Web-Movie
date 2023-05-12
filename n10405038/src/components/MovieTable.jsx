@@ -1,13 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+// Table module
 import DataGrid, {
   Column,
   Selection,
-  LoadPanel
+  LoadPanel,
+  Scrolling
 } from "devextreme-react/data-grid";
-import { useNavigate } from "react-router-dom";
 
 export default function MovieTable({ data }) {
+  // Navigation
   const navigate = useNavigate();
+  // when click the movie it goes to the movie detail
   const onSelectionChanged = ({ selectedRowsData }) => {
     const data = selectedRowsData[0];
     navigate(`/data?key=${data.imdbID}`);
@@ -42,8 +46,8 @@ export default function MovieTable({ data }) {
         />
         <Column dataField="classification" caption="Classification" />
         {/* <Scrolling mode="standard" /> */}
-        {/* <Scrolling mode="infinite" />
-        <ScrollView onScroll={onScroll} ref={fullContent} /> */}
+        <Scrolling mode="infinite" />
+        {/* <ScrollView onScroll={onScroll} ref={fullContent} /> */}
         {/* <Editing mode="row" onEditRowKeyChange={setEditRowKey} /> */}
         <LoadPanel enabled={false} />
       </DataGrid>

@@ -1,7 +1,13 @@
-import "devextreme/dist/css/dx.light.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-
+// Chart and table module css
+import "devextreme/dist/css/dx.light.css";
+// Notification module
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 import "./css/main.css";
 
 // Pages for navigation
@@ -11,44 +17,41 @@ import IndividualMovie from "./pages/IndividualMovie";
 import IndividualPerson from "./pages/IndividualPerson";
 import Register from "./pages/Register";
 import Signin from "./pages/Signin";
-
+// Timer for refresh
 import Timer from "./components/Timer";
 
 export default function App() {
+  // Call the all tokens with bearer and refresh tokens
   const ALLTOKEN = JSON.parse(localStorage.getItem("token"));
+  // useState for email, tokenNav, countdown
   const [email, setEmail] = useState();
   const [tokenNav, setTokenNav] = useState(true);
   const [countDown, setCountDown] = useState(true);
 
   useEffect(() => {
+    // if All tokens have not error
     if (
       !(ALLTOKEN === null || ALLTOKEN === undefined || ALLTOKEN === "undefined")
     ) {
-      let TOKEN = ALLTOKEN.bearer;
-      if (
-        ALLTOKEN === null ||
-        ALLTOKEN === undefined ||
-        ALLTOKEN === "undefined" ||
-        TOKEN === null ||
-        TOKEN === undefined ||
-        TOKEN === "undefined"
-      ) {
-      } else {
-        setEmail(localStorage.getItem("signin"));
-        setTokenNav(true);
-        setCountDown(true);
-      }
+      setEmail(localStorage.getItem("signin"));
+      setTokenNav(true);
+      setCountDown(true);
     } else {
       setTokenNav(false);
       setCountDown(false);
     }
   });
 
+  // when sign out remove all the itmes from local storage
   function SignOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("end_date");
     localStorage.removeItem("email");
-    window.location.href("/");
+    // redirecting to main with notification
+    NotificationManager.info("See you later!", "SignOut Success", 3000);
+    setTimeout(function () {
+      window.location.href = "/";
+    }, 2000);
   }
 
   return (
@@ -62,8 +65,7 @@ export default function App() {
               </h1>
             </div>
             <div className={countDown ? "nav-time" : "nav-token"}>
-              {/* <div className={countDown ? "nav-time" : ""}> */}
-              <Timer data={600000} />
+              <Timer />
             </div>
             <Link to="/">Home</Link>
             <Link to="/movie">Movie</Link>
@@ -78,7 +80,6 @@ export default function App() {
             </Link>
             <p className={!tokenNav ? "nav-token" : ""}> {email}</p>
           </nav>
-
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movie" element={<Movie />} />
@@ -95,6 +96,7 @@ export default function App() {
           Suh
         </p>
       </footer>
+      <NotificationContainer />
     </div>
   );
 }
