@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a>
-    <img src="/src/assets/img/head.jpg" alt="Logo">
+    <img src="/movie/src/images/movie-main.jpeg" alt="Logo"/>
   </a>
 
   <h3 align="center">Movie Web Application</h3>
@@ -37,7 +37,7 @@
 
 ## About The Project
 
-<img src="/movie/src/images/movie-main.jpeg" alt="Logo"/>
+<img src="/movie/src/images/mainpage.jpeg" alt="Logo"/>
 
 This web application shows a list of movies. If you set the release year, it will retrieve information about the movies’ list related searched year, and if you search for the movie title, it will send you the results including the search terms accordingly. Click on the movie list to find out more information about the movie. For more information about the movie, you can check the title, year of release, runtime, genre, box office figures, posters, and actors. When you click on an actor, it provides an intuitive view of the list of all the movies that the actor has starred in, as well as the Internet Movie Database (IMDB) statistics graph. Information about the cast is a service that requires login. Therefore, if you have an ID, you can receive the service through sign-in, and if you don't have an ID, you can register through the web page.
 This project will expire in 10 minutes after login. However, this web page provides a refresh button that allows the user to extend it again by pressing the button once every 10 minutes without having to log in. It also uses DevExtreme's table and chart to attract the user's attention with a neat and modern design. You can also sort the tables in this module to prioritize what you want.
@@ -61,7 +61,21 @@ This project will expire in 10 minutes after login. However, this web page provi
 
 This is an example of how to list things you need to use the software and how to install them.
 
-- npm
+- Server side
+
+  ```sh
+  cd movie
+  ```
+
+  ```sh
+  cd server
+  ```
+
+  ```sh
+  npm start
+  ```
+
+- Front side
 
   ```sh
   cd movie

@@ -93,7 +93,6 @@ export default function App() {
       <footer>
         <p>
           All data is from IMDB, Metacritic and RottenTomatoes. © 2023 Jasmine
-          Suh
         </p>
       </footer>
       <NotificationContainer />
