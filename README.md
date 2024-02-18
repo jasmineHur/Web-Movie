@@ -7,8 +7,8 @@
     <img src="/src/assets/img/head.jpg" alt="Logo">
   </a>
 
-  <h3 align="center">Happiniess Web Application (CAB230)</h3>
-  <h6> Please note: This project is not compatible with some npms(react-select/react-chartjs-2), needs to update </h6>
+  <h3 align="center">Movie Web Application</h3>
+  <h6> Please note: The Swagger is not available to use </h6>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -28,7 +28,6 @@
       </ul>
     </li>
     <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#reports">Reports</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -38,17 +37,10 @@
 
 ## About The Project
 
-<img src="/src/assets/img/main.jpg" alt="Logo"/>
+<img src="/movie/src/images/movie-main.jpeg" alt="Logo"/>
 
-With the enhancing technical industry and life standard of the world, people are getting focus on a
-“happiness”. Happiness is not only feeling, but also makes people be more productively and healthier.
-Happiness is consisting various factors such as health, relationship, and
-economy, therefore, this application is developed to know what things are made happiness up.
-Moreover, this application shows which country is the happiest and what factors of it.
-This application has a wonderful navigation bar which is changed depends on the user’s status such
-as login. In this application, there are used several modules for making it more efficient. chart.js is
-used for graphs are organized well for user sight. React-select and bootstrap modules are used in this
-app for looking gorgeous.
+This web application shows a list of movies. If you set the release year, it will retrieve information about the movies’ list related searched year, and if you search for the movie title, it will send you the results including the search terms accordingly. Click on the movie list to find out more information about the movie. For more information about the movie, you can check the title, year of release, runtime, genre, box office figures, posters, and actors. When you click on an actor, it provides an intuitive view of the list of all the movies that the actor has starred in, as well as the Internet Movie Database (IMDB) statistics graph. Information about the cast is a service that requires login. Therefore, if you have an ID, you can receive the service through sign-in, and if you don't have an ID, you can register through the web page.
+This project will expire in 10 minutes after login. However, this web page provides a refresh button that allows the user to extend it again by pressing the button once every 10 minutes without having to log in. It also uses DevExtreme's table and chart to attract the user's attention with a neat and modern design. You can also sort the tables in this module to prioritize what you want.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -56,10 +48,7 @@ app for looking gorgeous.
 
 - [![React][React.js]][React-url]
 - [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-- [![NodeJS][Node-js]][Node-url]
 - [![JS][JS]][JS-url]
-- [![Json][Json]][Json-url]
-- [![Mysql][Mysql]][Mysql-url]
 - [![Swagger][Swagger-io]][Swagger]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -73,9 +62,15 @@ app for looking gorgeous.
 This is an example of how to list things you need to use the software and how to install them.
 
 - npm
+
+  ```sh
+  cd movie
+  ```
+
   ```sh
   npm install
   ```
+
   ```sh
   npm start
   ```
@@ -86,19 +81,7 @@ This is an example of how to list things you need to use the software and how to
 
 ## Architecture
 
-<img src="/src/assets/img/Architecture.png" />
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- REPORT -->
-
-## Reports
-
-Documenting all process and description
-
-<a href="report-front.pdf">Report for Frontend side</a> <br/>
-
-<a href="report-server.pdf">Report for Server side</a>
+<img src="/movie/public/Architecture.png" />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
