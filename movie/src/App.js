@@ -92,7 +92,7 @@ export default function App() {
       </Router>
       <footer>
         <p>
-          All data is from IMDB, Metacritic and RottenTomatoes. © 2023 Justin
+          All data is from IMDB, Metacritic and RottenTomatoes. © 2023 Jasmine
           Suh
         </p>
       </footer>
